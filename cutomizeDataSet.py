@@ -29,17 +29,33 @@ def get_clothes_dicts(json_dir):
         with open(json_path) as f:
             img_anns = json.load(f)
 
+        record = {}
+        # add general info
+        record["file_name"] = '%s.jpg'%(annos[:-5])
+        record["image_id"] = '%s'%(annos[:-5])
+
+        height, width = cv2.imread(json_path).shape[:2]
+        record["height"] = height
+        record["width"] = width
+
         objs = []
         for _,anno in img_anns.items():
             bbox = anno['bounding_box']
+            segmentation = anno['segmentation']
             category_id = anno['category_id']
             keypoints = anno['landmarks']
             obj = {
-
+                "bbox":bbox,
+                "bbox_mode": BoxMode.XYXY_ABS,
+                "segmentation":segmentation,
+                "category_id":category_id,
+                "keypoints":keypoints,
             }
+            objs.append(obj)
+        record["annotations"] = objs
+        dataset_dicts.append(record)
 
-        img_anns.update({'filename':'%s.jpg'%(anno[:-5])})
-        img_anns.update({'image_id':'%s'%(anno[:-5])})
+    return dataset_dicts
 
 
 
