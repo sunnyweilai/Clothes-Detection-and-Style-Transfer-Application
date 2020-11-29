@@ -9,7 +9,7 @@ import random
 
 
 json_dir = "/Users/sunny/Documents/OD_Dataset/CustomizedDataSet/test/annos"
-image_dir = "/Users/sunny/Documents/OD_Dataset/CustomizedDataSet/test/image"
+image_dir = json_dir.replace("annos","image")
 
 def get_clothes_dicts(json_dir):
     dataset_dicts = []
@@ -43,7 +43,7 @@ def get_clothes_dicts(json_dir):
                         "bbox":bbox,
                         "bbox_mode": BoxMode.XYXY_ABS,
                         "segmentation":segmentation,
-                        "category_id":category_id,
+                        "category_id":0,
 
                     }
                     objs.append(obj)
@@ -52,33 +52,23 @@ def get_clothes_dicts(json_dir):
 
     return dataset_dicts
 
-# dataset = get_clothes_dicts(json_dir)
-#
+
 # json_name = 'clothes_dataset_test.json'
 # with open(json_name, 'w') as f:
 #   json.dump(dataset, f)
 
-# register new dataset to the detectron2
-# for d in ["train", "val"]:
-#     DatasetCatalog.register("clothes_" + d, lambda d = d: get_clothes_dicts(json_dir))
-#     MetadataCatalog.get("clothes_" + d).set(thing_classes=["short_sleeved_shirt", "long_sleeved_shirt",
-#                                                            "short_sleeved_outwear", "long_sleeved_outwear",
-#                                                            "vest", "sling", "shorts", "trousers", "skirt",
-#                                                            "short_sleeved_dress", "long_sleeved_dress",
-#                                                            "vest_dress", "sling_dress"])
-# clothes_metadata = MetadataCatalog.get("clothes_train")
 
-
-# visualize to verify register dataset
-# dataset_dicts = get_clothes_dicts(json_dir)
-# for d in random.sample(dataset_dicts, 1):
-#     img = cv2.imread(d["file_name"])
 #
-#     visualizer = Visualizer(img[:, :, ::-1], metadata=clothes_metadata, scale=0.5)
-#     out = visualizer.draw_dataset_dict(d)
-#     cv2.namedWindow("enhanced", 0);
-#     cv2.resizeWindow("enhanced", 2000, 800);
-#     cv2.imshow("enhanced", out.get_image()[:, :, ::-1])
-#     cv2.imwrite('verify.png', out.get_image()[:, :, ::-1])
-#     cv2.waitKey()
+# # visualize to verify register dataset
+# dataset_dicts = get_clothes_dicts(json_dir)
+# for d in dataset_dicts:
+#     if d["image_id"] == "000016":
+#         img = cv2.imread(d["file_name"])
+#         visualizer = Visualizer(img[:, :, ::-1], metadata=clothes_metadata, scale=0.5)
+#         out = visualizer.draw_dataset_dict(d)
+#         cv2.namedWindow("enhanced", 0);
+#         cv2.resizeWindow("enhanced", 2000, 800);
+#         cv2.imshow("enhanced", out.get_image()[:, :, ::-1])
+#         cv2.imwrite('09.png', out.get_image()[:, :, ::-1])
+#         cv2.waitKey()
 
