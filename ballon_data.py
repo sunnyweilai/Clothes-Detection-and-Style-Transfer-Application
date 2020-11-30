@@ -49,14 +49,7 @@ def get_balloon_dicts(img_dir):
         dataset_dicts.append(record)
     return dataset_dicts
 
-#
-# ballon_dir = "/Users/sunny/Documents/OD_Dataset/balloon/train"
-#
-# dataset = get_balloon_dicts(ballon_dir)
-# print(dataset)
 
-#
-#
 # register
 img_dir = "/Users/sunny/Documents/OD_Dataset/balloon/"
 

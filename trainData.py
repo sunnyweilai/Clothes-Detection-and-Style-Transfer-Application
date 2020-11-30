@@ -16,7 +16,7 @@ from detectron2.utils.visualizer import Visualizer
 from detectron2.data import MetadataCatalog, DatasetCatalog
 
 # register new dataset to the detectron2
-from cutomizeDataSet import get_clothes_dicts
+from clothes_data import get_clothes_dicts
 json_dir = "/Users/sunny/Documents/OD_Dataset/CustomizedDataSet/train/annos"
 
 
