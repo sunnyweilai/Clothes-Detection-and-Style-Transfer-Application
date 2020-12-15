@@ -44,7 +44,7 @@ def get_clothes_dicts(json_dir):
                         "bbox":bbox,
                         "bbox_mode": BoxMode.XYXY_ABS,
                         "segmentation":segmentation,
-                        "category_id":0,
+                        "category_id":category_id,
 
                     }
                     objs.append(obj)
@@ -63,19 +63,21 @@ def get_clothes_dicts(json_dir):
 
 for d in ["train", "val"]:
     DatasetCatalog.register("clothes_" + d, lambda d=d: get_clothes_dicts(annos_dir))
-    MetadataCatalog.get("clothes_" + d).set(thing_classes=["short_sleeved_shirt"])
+    MetadataCatalog.get("clothes_" + d).set(thing_classes=[ "short_sleeved_shirt", "long_sleeved_shirt","short_sleeved_outwear", "long_sleeved_outwear",
+                                                           "vest", "sling", "shorts", "trousers", "skirt",
+                                                           "short_sleeved_dress", "long_sleeved_dress",
+                                                           "vest_dress", "sling_dress"])
 
-# "short_sleeved_shirt", "long_sleeved_shirt","short_sleeved_outwear", "long_sleeved_outwear",
-#                                                            "vest", "sling", "shorts", "trousers", "skirt",
-#                                                            "short_sleeved_dress", "long_sleeved_dress",
-#                                                            "vest_dress", "sling_dress"
+
 
 
 # clothes_metadata = MetadataCatalog.get("clothes_train")
 #
+# print(clothes_metadata)
+#
 # # visualize to verify register dataset
 # dataset_dicts = get_clothes_dicts(annos_dir)
-# d = dataset_dicts[4]
+# d = dataset_dicts[30]
 # img = cv2.imread(d["file_name"])
 # visualizer = Visualizer(img[:, :, ::-1], metadata=clothes_metadata, scale=0.5)
 # out = visualizer.draw_dataset_dict(d)
